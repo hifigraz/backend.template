@@ -1,0 +1,72 @@
+[build-system]
+build-backend = "setuptools.build_meta"
+requires = [
+  "setuptools>=70.0",
+  "wheel>=0.41"
+]
+
+[project]
+authors = [ { name = "Robert Ulmer", email = "rulmer@lr.htlweiz.at" } ]
+
+name = "BACKEND_NAME_PLACEHOLDER"
+version = "0.0.1"
+description = "Backend description:"
+readme = "README.md"
+requires-python = ">3.13,<4.0"
+license = "GPL-3.0-or-later"
+keywords = [
+  "api",
+  "backend",
+  "fastapi",
+  "sql",
+  "sqlalchemy"
+]
+
+classifiers = [
+  "Development Status :: 1 - Early prototype",
+  "Environment :: Console",
+  "Natural Language :: English",
+  "Operating System :: MacOS",
+  "Operating System :: Microsoft :: Windows",
+  "Operating System :: POSIX :: Linux",
+  "Operating System :: POSIX",
+  "Programming Language :: Python"
+]
+
+dependencies = [
+  "fastapi>=0.120",
+  "passlib[bcrypt]>=1.7",
+  "psycopg2-binary>=2.9",
+  "pydantic>=2",
+  "python-jose>=3.5",
+  "sqlalchemy>=2",
+  "uvicorn"
+]
+
+[project.scripts]
+BACKEND_NAME_PLACEHOLDER_test = "BACKEND_NAME_PLACEHOLDER.utils:test"
+
+[project.urls]
+"Homepage" = "https://BACKEND_NAME_PLACEHOLDER.com"
+"Documentation" = "https://BACKEND_NAME_PLACEHOLDER.com"
+
+[project.optional-dependencies]
+lint = [
+    "black",
+    "codespell>=2.2.4",
+    "isort",
+    "ruff",
+    "tomli",
+    "validate-pyproject[all]",
+    "vulture",
+]
+
+test = [
+  "pytest"
+]
+
+vim = [
+  "ollama",
+  "pygls<2",
+]
+
