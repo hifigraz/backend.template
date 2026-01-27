@@ -1,8 +1,10 @@
-from ..engine import get_engine
-from ..crud import Crud
+from fastapi import FastAPI
 
-def define_routes(app):
+
+def define_routes(app: FastAPI) -> None:
+
     @app.get("/")
     def get_root():
-        crud = Crud(get_engine())
-        return crud.get_root()
+        return {"/"}
+
+    assert get_root

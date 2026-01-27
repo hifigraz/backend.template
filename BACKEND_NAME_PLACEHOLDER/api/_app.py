@@ -1,7 +1,9 @@
 from fastapi import FastAPI
+
 from ._routes import define_routes
 
-_app = None 
+_app: FastAPI | None = None
+
 
 def build_app():
     global _app

@@ -52,6 +52,7 @@ BACKEND_NAME_PLACEHOLDER_test = "BACKEND_NAME_PLACEHOLDER.utils:test"
 
 [project.optional-dependencies]
 lint = [
+    "basedpyright",
     "black",
     "codespell>=2.2.4",
     "isort",

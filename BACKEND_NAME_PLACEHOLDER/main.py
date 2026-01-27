@@ -1,6 +1,3 @@
 import BACKEND_NAME_PLACEHOLDER
 
 app = BACKEND_NAME_PLACEHOLDER.api.build_app()
-
-
-

@@ -1,6 +1,6 @@
-class Crud():
-    def __init__(self, engine):
-        self._engine =engine 
+from sqlalchemy import Engine
 
-    def get_root(self):
-        return { "message:": "Hello Root!" }
+
+class Crud:
+    def __init__(self, engine: Engine):
+        self._engine: Engine = engine
