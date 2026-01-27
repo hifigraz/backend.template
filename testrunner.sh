@@ -15,7 +15,7 @@ pytest
 echo "--- basedpyright ---"
 basedpyright $(ls -d */ | grep -v build | grep -v venv | grep -v .egg-info)
 echo "--- codespell ---"
-codespell $(ls -d */ | grep -v build | grep -v venv | grep -v .egg-info)
+codespell $(ls -d */ | grep -v build | grep -v venv | grep -v .egg-info) README.md
 echo "--- done ---"
 inotifywait -t 0 --r . -e modify -e create -e delete -e move -e move_self &
 kill_pid=$!
