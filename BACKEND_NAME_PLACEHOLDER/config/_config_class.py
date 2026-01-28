@@ -1,25 +1,33 @@
+import json
+import os
+
+
 class Config:
 
     DB_CONNECTION_STRING: str = "sqlite:///:memory:"
 
-    __instance: Config | None = None
+    __instances: dict[str, Config] = {}
 
-    def __init__(self, file_name: str | None = None):
-        if Config.__instance:
+    def __init__(self, file_name: str = ""):
+        if str in Config.__instances:
             raise RuntimeError("Don't Call constructor!")
-        self._connection_string: str = Config.DB_CONNECTION_STRING
+        Config.__instances[file_name] = self
         if file_name:
-            self.load(file_name)
+            self._load(file_name)
+        else:
+            self._connection_string: str = Config.DB_CONNECTION_STRING
 
-    def load(self, filename: str) -> None:
-        raise NotImplementedError(f"loading file {filename} not yet implemented.")
+    def _load(self, filename: str) -> None:
+        if os.path.isfile(filename):
+            with open(filename, "r") as f:
+                self._connection_string = json.load(f)["connection_string"]
 
     @property
     def connection_string(self) -> str:
         return self._connection_string
 
     @classmethod
-    def get_instance(cls, file_name: str | None = None) -> Config:
-        if not cls.__instance:
-            cls.__instance = Config(file_name)
-        return cls.__instance
+    def get_instance(cls, file_name: str = "") -> Config:
+        if file_name in cls.__instances:
+            return cls.__instances[file_name]
+        return Config(file_name)

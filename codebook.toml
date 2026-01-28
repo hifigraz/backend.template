@@ -17,11 +17,24 @@ dictionaries = ["en_us", "de_de"]
 # Codebook will add words here when you select "Add to dictionary"
 # Default: []
 words = [
+  "Ulmer",
+  "basedpyright",
   "capfd",
   "codebook",
+  "codespell",
+  "fastapi",
+  "isort",
+  "ollama",
+  "passlib",
+  "psycopg",
+  "pydantic",
+  "pygls",
+  "pyproject",
   "pyright",
   "rustc",
   "tablename",
+  "tomli",
+  "uvicorn",
 ]
 
 # Words that should always be flagged as incorrect

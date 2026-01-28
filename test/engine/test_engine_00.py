@@ -1,6 +1,7 @@
 from sqlalchemy import inspect, text
 from sqlalchemy.orm import Session
 
+from BACKEND_NAME_PLACEHOLDER.config import Config
 from BACKEND_NAME_PLACEHOLDER.engine import get_engine
 from BACKEND_NAME_PLACEHOLDER.model import Entity, Person, User
 
@@ -29,6 +30,7 @@ TEST_01_USER_PASSWORD_HASH = "hash"
 
 
 def test_engine_01():
+    _ = Config.get_instance()
     engine = get_engine()
     user_repr: str = ""
     with Session(bind=engine) as session:

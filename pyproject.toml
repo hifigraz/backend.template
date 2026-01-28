@@ -45,6 +45,7 @@ dependencies = [
 
 [project.scripts]
 BACKEND_NAME_PLACEHOLDER_test = "BACKEND_NAME_PLACEHOLDER.utils:test"
+BACKEND_NAME_PLACEHOLDER_user = "BACKEND_NAME_PLACEHOLDER.utils:user_main"
 
 [project.urls]
 "Homepage" = "https://BACKEND_NAME_PLACEHOLDER.com"
