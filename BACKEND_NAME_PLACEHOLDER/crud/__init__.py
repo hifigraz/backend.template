@@ -1,6 +1,5 @@
-from sqlalchemy import Engine
+from ._crud import Crud
 
-
-class Crud:
-    def __init__(self, engine: Engine):
-        self._engine: Engine = engine
+__all__ = [
+    "Crud",
+]
