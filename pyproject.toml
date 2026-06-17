@@ -34,7 +34,9 @@ classifiers = [
 ]
 
 dependencies = [
+  "bcrypt<4.1",
   "fastapi>=0.120",
+  "httpx>=0.28.1",
   "passlib[bcrypt]>=1.7",
   "psycopg2-binary>=2.9",
   "pydantic>=2",
