@@ -1,4 +1,5 @@
 from fastapi import FastAPI, HTTPException, status
+from passlib.context import CryptContext
 from starlette.status import HTTP_404_NOT_FOUND, HTTP_409_CONFLICT
 
 from ..config import get_logger
@@ -6,6 +7,8 @@ from ..crud import Crud
 from ..schema import EntityFilter, UserBase, UserFilter, UserFull
 
 log = get_logger()
+
+_pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 
 def define_routes(app: FastAPI, crud: Crud) -> None:
@@ -15,7 +18,8 @@ def define_routes(app: FastAPI, crud: Crud) -> None:
         user: UserBase,
     ) -> UserFull:
         try:
-            return crud.create_user(user)
+            hashed = user.model_copy(update={"password_hash": _pwd_context.hash(user.password_hash)})
+            return crud.create_user(hashed)
         except AttributeError as err:
             log.error(str(err))
             raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail=str(err))
@@ -68,4 +72,4 @@ def define_routes(app: FastAPI, crud: Crud) -> None:
             return crud.delete_user(id)
         except AttributeError as error:
             log.error(error)
-            return HTTPException(status_code=404, detail=f"No User with id {id}")
+            raise HTTPException(status_code=404, detail=f"No User with id {id}")
