@@ -215,3 +215,7 @@ __marimo__/
 # Streamlit
 .streamlit/secrets.toml
 /test/_01_generated_import.py
+
+
+
+uv.lock

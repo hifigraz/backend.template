@@ -25,7 +25,7 @@ Methods:
 class Config:
 
     DB_CONNECTION_STRING: str = "sqlite:///:memory:"
-    __instances: dict[str, Config] = {}
+    __instances: dict[str, "Config"] = {}
 
     KEY_CONNECTION_STRING: str = "connection_string"
     KEY_LOG_LEVEL: str = "log_level"
@@ -34,11 +34,10 @@ class Config:
         if file_name in Config.__instances:
             raise RuntimeError("Don't Call constructor!")
         Config.__instances[file_name] = self
+        self._log_level: int | None = None
+        self._connection_string: str = Config.DB_CONNECTION_STRING
         if file_name:
             self._load(file_name)
-        else:
-            self._log_level: int | None = None
-            self._connection_string: str = Config.DB_CONNECTION_STRING
 
     def _load(self, filename: str) -> None:
         if os.path.isfile(filename):
@@ -75,7 +74,7 @@ class Config:
         return self._log_level
 
     @classmethod
-    def get_instance(cls, file_name: str = "") -> Config:
+    def get_instance(cls, file_name: str = "") -> "Config":
         """
         Returns an instance of the Config class with the given file name. If no file name is provided,
         it will use the default connection string. If an instance already exists for the provided file
