@@ -38,9 +38,10 @@ dependencies = [
   "passlib[bcrypt]>=1.7",
   "psycopg2-binary>=2.9",
   "pydantic>=2",
+  "pytest>=9.1.0",
   "python-jose>=3.5",
   "sqlalchemy>=2",
-  "uvicorn"
+  "uvicorn",
 ]
 
 [project.scripts]
