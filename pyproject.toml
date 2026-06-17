@@ -1,12 +1,9 @@
 [build-system]
 build-backend = "setuptools.build_meta"
-requires = [
-  "setuptools>=70.0",
-  "wheel>=0.41"
-]
+requires = ["setuptools>=70.0", "wheel>=0.41"]
 
 [project]
-authors = [ { name = "Robert Ulmer", email = "rulmer@lr.htlweiz.at" } ]
+authors = [{ name = "Robert Ulmer", email = "rulmer@lr.htlweiz.at" }]
 
 name = "BACKEND_NAME_PLACEHOLDER"
 version = "0.0.1"
@@ -14,13 +11,7 @@ description = "Backend description:"
 readme = "README.md"
 requires-python = ">3.13,<4.0"
 license = "GPL-3.0-or-later"
-keywords = [
-  "api",
-  "backend",
-  "fastapi",
-  "sql",
-  "sqlalchemy"
-]
+keywords = ["api", "backend", "fastapi", "sql", "sqlalchemy"]
 
 classifiers = [
   "Development Status :: 1 - Early prototype",
@@ -30,7 +21,7 @@ classifiers = [
   "Operating System :: Microsoft :: Windows",
   "Operating System :: POSIX :: Linux",
   "Operating System :: POSIX",
-  "Programming Language :: Python"
+  "Programming Language :: Python",
 ]
 
 dependencies = [
@@ -40,7 +31,7 @@ dependencies = [
   "pydantic>=2",
   "python-jose>=3.5",
   "sqlalchemy>=2",
-  "uvicorn"
+  "uvicorn",
 ]
 
 [project.scripts]
@@ -53,22 +44,16 @@ BACKEND_NAME_PLACEHOLDER_user = "BACKEND_NAME_PLACEHOLDER.utils:user_main"
 
 [project.optional-dependencies]
 lint = [
-    "basedpyright",
-    "black",
-    "codespell>=2.2.4",
-    "isort",
-    "ruff",
-    "tomli",
-    "validate-pyproject[all]",
-    "vulture",
+  "basedpyright",
+  "black",
+  "codespell>=2.2.4",
+  "isort",
+  "ruff",
+  "tomli",
+  "validate-pyproject[all]",
+  "vulture",
 ]
 
-test = [
-  "pytest"
-]
+test = ["pytest", "httpx2"]
 
-vim = [
-  "ollama",
-  "pygls<2",
-]
-
+vim = ["ollama", "pygls<2"]

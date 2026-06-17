@@ -58,13 +58,15 @@ class CrudUsers(CrudEntity):
         self, new_user: UserBase, existing_entity: EntityFull | None = None
     ) -> UserFull:
         """
-        Creates a new UserFull object in the database by saving a new User object and associating it with an EntityBase.
+        Creates a new UserFull object in the database by saving a new User object and associating
+        it with an EntityBase.
 
         Args:
-            new_user (UserBase): The new user to be created, containing user_name, password_hash, and name attributes.
+            new_user (UserBase): The new user to be created, containing user_name, password_hash,
+                and name attributes. NOTE: password_hash must already be hashed by the caller.
 
         Returns:
-            UserFull: A new UserFull object representing the newly created user, including user_name, name, password_hash, and id.
+            UserFull: A new UserFull object representing the newly created user.
         """
         with Session(bind=self._engine) as session:
             user = User()
@@ -97,20 +99,42 @@ class CrudUsers(CrudEntity):
                 )
                 return user_full
             except IntegrityError as exc:
-                log.error(f"IntegrityError: {exc.detail}")
+                log.error(f"IntegrityError: {exc}")
                 raise AttributeError(
                     ERROR_MESSAGES.DUPLICATE_ENTRY
                     % (user.__class__.__name__, "user_name", user.user_name)
                 )
 
+    def get_user_by_name(self, user_name: str) -> UserFull | None:
+        """
+        Fetches a single user by its exact user_name, including the password hash.
+        Used by the authentication layer.
+
+        Args:
+            user_name (str): The exact username to look up.
+
+        Returns:
+            UserFull | None: The matching user, or None if no such user exists.
+        """
+        with Session(bind=self._engine) as session:
+            stmt = select(User).where(User.user_name == user_name)
+            orm_user = session.execute(stmt).scalars().first()
+            if orm_user is None:
+                return None
+            return UserFull(
+                id=orm_user.entity_id,
+                name=orm_user.entity.name,
+                user_name=orm_user.user_name,
+                password_hash=orm_user.password_hash,
+            )
+
     def get_users(self, filter: UserFilter | None = None) -> list[UserFull]:
         """
         Fetches a list of UserFull objects from the database. If a filter is provided, it filters
-        the users based on the provided string in their user_name or name fields.
+        the users based on the provided values.
 
         Args:
-            filter (str | None, optional): A string that can be used to filter users by user_name
-                                           or name. Defaults to None which means no filtering.
+            filter (UserFilter | None, optional): Filter object. Defaults to None (no filtering).
 
         Returns:
             list[UserFull]: A list of UserFull objects representing the fetched users.

@@ -1,3 +1,7 @@
 {
-  "connection_string": "postgresql://admin:Kennwort1@localhost/testuserdb"
+  "connection_string": "postgresql://admin:Kennwort1@localhost/testuserdb",
+  "log_level": "INFO",
+  "admin_user": "RootUser",
+  "admin_password": "Kennwort1",
+  "secret_key": "4bc4f9d8db86799edb228702c7cb3a20adc447a0922d4958199942e5f71fec63"
 }
